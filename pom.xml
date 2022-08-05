@@ -9,11 +9,11 @@
       <relativePath/> <!-- lookup parent from repository -->
    </parent>
    <groupId>com.example</groupId>
-   <artifactId>hapi-fhir-demo</artifactId>
+   <artifactId>hapi-fhir-plain-server</artifactId>
    <version>0.0.1-SNAPSHOT</version>
    <packaging>war</packaging>
-   <name>hapi-fhir-demo</name>
-   <description>hapi-fhir-demo</description>
+   <name>hapi-fhir-plain-server</name>
+   <description>hapi-fhir-plain-server</description>
    <properties>
       <java.version>11</java.version>
       <repackage.classifier/>
