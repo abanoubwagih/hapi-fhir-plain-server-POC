@@ -8,6 +8,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import java.util.List;
 import java.util.Optional;
 
 @Mapper
@@ -15,4 +16,7 @@ import java.util.Optional;
 public interface PatientRepo {
    @Select("select * from patient where id = #{patientId}")
    Optional<Patient> findPatient(@NotNull @Positive @Param("patientId") Integer patientId);
+
+   @Select("select * from patient")
+   List<Patient> findAllPatient();
 }

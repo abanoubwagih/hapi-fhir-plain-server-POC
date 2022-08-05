@@ -9,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import java.util.List;
 import java.util.Optional;
 
 @Validated
@@ -16,11 +17,16 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class PatientService {
-   private final PatientRepo patientRepo;
+    private final PatientRepo patientRepo;
 
-   public Patient getPatient(@NotNull @Positive Integer patientId) {
-      Optional<Patient> patient = patientRepo.findPatient(patientId);
-      log.info(String.valueOf(patient.get()));
-      return Optional.ofNullable(patient).get().get();
-   }
+    public Patient getPatient(@NotNull @Positive Integer patientId) {
+        Optional<Patient> patient = patientRepo.findPatient(patientId);
+        log.info(String.valueOf(patient.get()));
+        return Optional.ofNullable(patient).get().get();
+    }
+
+    public List<Patient> getAllPatients() {
+        List<Patient> patient = patientRepo.findAllPatient();
+        return patient;
+    }
 }
