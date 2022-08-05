@@ -11,7 +11,7 @@ public class SimpleRestfulServer extends RestfulServer {
     @Override
     protected void initialize()throws ServletException {
         //create a context for the appropriate version
-        setFhirContext(FhirContext.forR5());
+        setFhirContext(FhirContext.forR4());
         //Register Resource Providers - COMING SOON
     }
 }
