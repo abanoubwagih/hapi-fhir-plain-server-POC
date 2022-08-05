@@ -1,4 +1,4 @@
-package com.allegiancemd.fhirseerver;
+package com.allegiancemd.fhir;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.rest.server.RestfulServer;
