@@ -18,6 +18,7 @@
       <java.version>11</java.version>
       <repackage.classifier/>
       <spring-native.version>0.12.1</spring-native.version>
+      <hapifhir_version>6.0.0</hapifhir_version>
    </properties>
    <dependencies>
       <dependency>
@@ -75,6 +76,59 @@
          <groupId>javax.validation</groupId>
          <artifactId>validation-api</artifactId>
          <version>2.0.1.Final</version>
+      </dependency>
+
+      <!-- This dependency includes the core HAPI-FHIR classes -->
+      <dependency>
+         <groupId>ca.uhn.hapi.fhir</groupId>
+         <artifactId>hapi-fhir-base</artifactId>
+         <version>${hapifhir_version}</version>
+      </dependency>
+
+      <!-- This dependency includes the HAPI FHIR Server Framework -->
+      <dependency>
+         <groupId>ca.uhn.hapi.fhir</groupId>
+         <artifactId>hapi-fhir-server</artifactId>
+         <version>${hapifhir_version}</version>
+      </dependency>
+
+      <!-- At least one "structures" JAR must also be included -->
+      <dependency>
+         <groupId>ca.uhn.hapi.fhir</groupId>
+         <artifactId>hapi-fhir-structures-r4</artifactId>
+         <version>${hapifhir_version}</version>
+      </dependency>
+
+      <!-- Used for validation  -->
+      <dependency>
+         <groupId>ca.uhn.hapi.fhir</groupId>
+         <artifactId>hapi-fhir-validation-resources-r4</artifactId>
+         <version>${hapifhir_version}</version>
+      </dependency>
+      <dependency>
+         <groupId>com.phloc</groupId>
+         <artifactId>phloc-schematron</artifactId>
+         <version>2.7.0</version>
+      </dependency>
+
+      <!--
+      HAPI-FHIR uses Logback for logging support. The logback library is included
+      automatically by Maven as a part of the hapi-fhir-base dependency, but you
+      also need to include a logging library. Logback is used here, but log4j
+      would also be fine.
+      -->
+      <dependency>
+         <groupId>ch.qos.logback</groupId>
+         <artifactId>logback-classic</artifactId>
+         <version>1.2.3</version>
+      </dependency>
+
+      <!-- Needed for JEE/Servlet support -->
+      <dependency>
+         <groupId>javax.servlet</groupId>
+         <artifactId>javax.servlet-api</artifactId>
+         <version>3.0.1</version>
+         <scope>provided</scope>
       </dependency>
 
    </dependencies>
