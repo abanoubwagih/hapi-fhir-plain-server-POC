@@ -1,15 +1,13 @@
 package com.allegiancemd.resourceprovider;
 
-import ca.uhn.fhir.context.FhirContext;
-import ca.uhn.fhir.parser.IParser;
 import ca.uhn.fhir.rest.annotation.IdParam;
 import ca.uhn.fhir.rest.annotation.Read;
 import ca.uhn.fhir.rest.annotation.RequiredParam;
 import ca.uhn.fhir.rest.annotation.Search;
 import ca.uhn.fhir.rest.param.StringParam;
 import ca.uhn.fhir.rest.server.IResourceProvider;
-import ca.uhn.fhir.rest.server.exceptions.ResourceNotFoundException;
 import com.allegiancemd.entity.PatientEntity;
+import com.allegiancemd.mapper.PatientResourceMapper;
 import com.allegiancemd.service.PatientService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -49,32 +47,41 @@ public class PatientResourceProvider implements IResourceProvider {
         return patientMap.values().stream().collect(Collectors.toList());
     }
 
+//    @Read()
+//    public Patient read(@IdParam IdType theId) {
+//        loadDummyPatients();
+//        Patient retVal = patientMap.get(theId.getIdPart());
+//
+//
+//        FhirContext fhirContext = FhirContext.forR4();
+//
+////        used to parse / encode ResourceProvider to xml string
+//        String resourceToString = fhirContext.newXmlParser().encodeResourceToString(retVal);
+//        log.info("ResourceProvider To Xml String ========> " + resourceToString);
+//
+////        used to parse / encode ResourceProvider to json string
+//        IParser iParser = fhirContext.newJsonParser();
+//        iParser.setPrettyPrint(true);
+//        resourceToString = iParser.encodeResourceToString(retVal);
+//        log.info("ResourceProvider To Json String ========> " + resourceToString);
+//
+////        used to decode ResourceProvider from json string
+//        Patient parsedPatient = iParser.parseResource(Patient.class, resourceToString);
+//        log.info("parsedPatient =======> " + parsedPatient);
+//
+//        if (retVal == null) {
+//            throw new ResourceNotFoundException(theId);
+//        }
+//        return retVal;
+//    }
+
     @Read()
     public Patient read(@IdParam IdType theId) {
-        loadDummyPatients();
-        Patient retVal = patientMap.get(theId.getIdPart());
+        PatientEntity patientEntity = patientService.getPatient(Integer.parseInt(theId.getIdPart()));
 
-
-        FhirContext fhirContext = FhirContext.forR4();
-
-//        used to parse / encode ResourceProvider to xml string
-        String resourceToString = fhirContext.newXmlParser().encodeResourceToString(retVal);
-        log.info("ResourceProvider To Xml String ========> " + resourceToString);
-
-//        used to parse / encode ResourceProvider to json string
-        IParser iParser = fhirContext.newJsonParser();
-        iParser.setPrettyPrint(true);
-        resourceToString = iParser.encodeResourceToString(retVal);
-        log.info("ResourceProvider To Json String ========> " + resourceToString);
-
-//        used to decode ResourceProvider from json string
-        Patient parsedPatient = iParser.parseResource(Patient.class, resourceToString);
-        log.info("parsedPatient =======> " + parsedPatient);
-
-        if (retVal == null) {
-            throw new ResourceNotFoundException(theId);
-        }
-        return retVal;
+        Patient patient = PatientResourceMapper.INSTANCE.wrapperToPatientResource(patientEntity);
+        log.info("resource provider Id: " + patient.getIdentifier().get(0).getValue());
+        return patient;
     }
 
     private List<Patient> searchByFamilyName(String familyName) {

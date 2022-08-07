@@ -21,7 +21,6 @@ public class PatientService {
 
     public PatientEntity getPatient(@NotNull @Positive Integer patientId) {
         Optional<PatientEntity> patient = patientRepo.findPatient(patientId);
-        log.info(String.valueOf(patient.get()));
         return Optional.ofNullable(patient).get().get();
     }
 
