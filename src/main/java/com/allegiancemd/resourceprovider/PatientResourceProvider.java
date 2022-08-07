@@ -62,6 +62,7 @@ public class PatientResourceProvider implements IResourceProvider {
 
 //        used to parse / encode ResourceProvider to json string
         IParser iParser = fhirContext.newJsonParser();
+        iParser.setPrettyPrint(true);
         resourceToString = iParser.encodeResourceToString(retVal);
         log.info("ResourceProvider To Json String ========> " + resourceToString);
 
