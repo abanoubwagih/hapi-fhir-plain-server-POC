@@ -1,6 +1,6 @@
 package com.allegiancemd.repo;
 
-import com.allegiancemd.entity.Patient;
+import com.allegiancemd.entity.PatientEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -15,8 +15,8 @@ import java.util.Optional;
 @Validated
 public interface PatientRepo {
    @Select("select * from patient where id = #{patientId}")
-   Optional<Patient> findPatient(@NotNull @Positive @Param("patientId") Integer patientId);
+   Optional<PatientEntity> findPatient(@NotNull @Positive @Param("patientId") Integer patientId);
 
    @Select("select * from patient")
-   List<Patient> findAllPatient();
+   List<PatientEntity> findAllPatient();
 }

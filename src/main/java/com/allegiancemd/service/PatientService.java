@@ -1,6 +1,6 @@
 package com.allegiancemd.service;
 
-import com.allegiancemd.entity.Patient;
+import com.allegiancemd.entity.PatientEntity;
 import com.allegiancemd.repo.PatientRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,14 +19,14 @@ import java.util.Optional;
 public class PatientService {
     private final PatientRepo patientRepo;
 
-    public Patient getPatient(@NotNull @Positive Integer patientId) {
-        Optional<Patient> patient = patientRepo.findPatient(patientId);
+    public PatientEntity getPatient(@NotNull @Positive Integer patientId) {
+        Optional<PatientEntity> patient = patientRepo.findPatient(patientId);
         log.info(String.valueOf(patient.get()));
         return Optional.ofNullable(patient).get().get();
     }
 
-    public List<Patient> getAllPatients() {
-        List<Patient> patient = patientRepo.findAllPatient();
-        return patient;
+    public List<PatientEntity> getAllPatients() {
+        List<PatientEntity> patientEntity = patientRepo.findAllPatient();
+        return patientEntity;
     }
 }

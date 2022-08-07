@@ -24,7 +24,7 @@ public class FhirAuthorizationInterceptor extends AuthorizationInterceptor {
         RuleBuilder builder = new RuleBuilder();
         builder.allow().metadata().andThen()
                 .allow().read().allResources().withAnyId().andThen()
-                .allow().write().resourcesOfType(Observation.class).inCompartment("Patient", new IdType("Patient/123"));
+                .allow().write().resourcesOfType(Observation.class).inCompartment("PatientEntity", new IdType("PatientEntity/123"));
 
         return builder.build();
     }

@@ -9,6 +9,7 @@ import ca.uhn.fhir.rest.annotation.Search;
 import ca.uhn.fhir.rest.param.StringParam;
 import ca.uhn.fhir.rest.server.IResourceProvider;
 import ca.uhn.fhir.rest.server.exceptions.ResourceNotFoundException;
+import com.allegiancemd.entity.PatientEntity;
 import com.allegiancemd.service.PatientService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -90,12 +91,12 @@ public class PatientResourceProvider implements IResourceProvider {
 
     private void loadDummyPatients() {
         Patient patient = new Patient();
-        List<com.allegiancemd.entity.Patient> patientList = patientService.getAllPatients();
-        for (int i = 0; i < patientList.size(); i++) {
+        List<PatientEntity> patientEntityList = patientService.getAllPatients();
+        for (int i = 0; i < patientEntityList.size(); i++) {
             patient = new Patient();
             patient.setId(Integer.toString(i));
-            patient.addIdentifier().setSystem("http://optum.com/MRNs").setValue(patientList.get(i).getId().toString());
-            patient.addName().setFamily(patientList.get(i).getLastName()).addGiven(patientList.get(i).getFirstName());
+            patient.addIdentifier().setSystem("http://optum.com/MRNs").setValue(patientEntityList.get(i).getId().toString());
+            patient.addName().setFamily(patientEntityList.get(i).getLastName()).addGiven(patientEntityList.get(i).getFirstName());
 
             this.patientMap.put(Integer.toString(i), patient);
         }

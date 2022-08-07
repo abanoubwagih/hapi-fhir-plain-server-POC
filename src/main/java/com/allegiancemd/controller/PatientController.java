@@ -1,6 +1,6 @@
 package com.allegiancemd.controller;
 
-import com.allegiancemd.entity.Patient;
+import com.allegiancemd.entity.PatientEntity;
 import com.allegiancemd.service.PatientService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,9 +21,9 @@ public class PatientController {
    private final PatientService patientService;
 
    @GetMapping("/patient")
-   public ResponseEntity<Patient> patient(@RequestParam("patientId") @NotNull @Positive Integer patientId) {
+   public ResponseEntity<PatientEntity> patient(@RequestParam("patientId") @NotNull @Positive Integer patientId) {
       log.info("================================");
-      Patient patient = patientService.getPatient(patientId);
-      return ResponseEntity.ok().body(patient);
+      PatientEntity patientEntity = patientService.getPatient(patientId);
+      return ResponseEntity.ok().body(patientEntity);
    }
 }
