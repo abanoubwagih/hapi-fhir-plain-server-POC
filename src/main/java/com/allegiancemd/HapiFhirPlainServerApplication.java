@@ -23,5 +23,4 @@ public class HapiFhirPlainServerApplication {
         registration.setName("FhirServlet");
         return registration;
     }
-
 }

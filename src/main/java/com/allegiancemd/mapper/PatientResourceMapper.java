@@ -41,5 +41,4 @@ public interface PatientResourceMapper {
         }
         return null;
     }
-
 }
