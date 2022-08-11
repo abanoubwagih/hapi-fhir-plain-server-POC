@@ -17,11 +17,12 @@ import javax.servlet.annotation.WebServlet;
 @Component
 public class SimpleRestfulServer extends RestfulServer {
     private final PatientResourceProvider patientResourceProvider;
+    private final FhirContextSingleton fhirContextSingleton;
 
     @Override
     protected void initialize() throws ServletException {
         //create a context for the appropriate version
-        setFhirContext(FhirContext.forR4());
+        setFhirContext(fhirContextSingleton.fhirContextSingleton());
         //Register Resource Providers
         registerProvider(patientResourceProvider);
 
