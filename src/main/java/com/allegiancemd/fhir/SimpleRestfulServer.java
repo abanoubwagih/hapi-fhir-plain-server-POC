@@ -6,26 +6,24 @@ import com.allegiancemd.interceptor.FhirAuthorizationInterceptor;
 import com.allegiancemd.interceptor.RequestCounterInterceptor;
 import com.allegiancemd.interceptor.RequestExceptionInterceptor;
 import com.allegiancemd.resourceprovider.PatientResourceProvider;
-import com.allegiancemd.service.PatientService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import java.util.ArrayList;
-import java.util.List;
 
 @RequiredArgsConstructor
 @WebServlet("/*")
+@Component
 public class SimpleRestfulServer extends RestfulServer {
-
-    private final PatientService patientService;
+    private final PatientResourceProvider patientResourceProvider;
 
     @Override
     protected void initialize() throws ServletException {
         //create a context for the appropriate version
         setFhirContext(FhirContext.forR4());
         //Register Resource Providers
-        registerProvider(new PatientResourceProvider(patientService));
+        registerProvider(patientResourceProvider);
 
 //        register Interceptors
         registerInterceptor(new FhirAuthorizationInterceptor());
