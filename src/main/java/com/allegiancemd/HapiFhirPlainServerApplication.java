@@ -1,7 +1,6 @@
 package com.allegiancemd;
 
 import com.allegiancemd.fhir.SimpleRestfulServer;
-import com.allegiancemd.service.PatientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 @RequiredArgsConstructor
 @SpringBootApplication
 public class HapiFhirPlainServerApplication {
-    private final PatientService patientService;
+    private final SimpleRestfulServer simpleRestfulServer;
 
     public static void main(String[] args) {
         SpringApplication.run(HapiFhirPlainServerApplication.class, args);
@@ -19,7 +18,7 @@ public class HapiFhirPlainServerApplication {
 
     @Bean
     public ServletRegistrationBean ServletRegistrationBean() {
-        ServletRegistrationBean registration = new ServletRegistrationBean(new SimpleRestfulServer(patientService), "/*");
+        ServletRegistrationBean registration = new ServletRegistrationBean(simpleRestfulServer, "/*");
         registration.setName("FhirServlet");
         return registration;
     }
